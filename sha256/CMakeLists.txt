@@ -10,7 +10,12 @@ set (incssl ${CMAKE_CURRENT_SOURCE_DIR}
 set (libs ${libssl})
 
 if (CMAKE_SYSTEM_NAME MATCHES "Linux")
-   set (libs ${libs} ${CMAKE_INSTALL_PREFIX}/lib/libbsd_pic.a)
+   set (libs ${libs} ${CMAKE_INSTALL_PREFIX}/lib/libbsd.a)
+endif()
+
+if (CMAKE_SYSTEM_NAME MATCHES "(Solaris|SunOS)")
+   set (libs ${libs} ${CMAKE_INSTALL_PREFIX}/lib/libbsd.a)
+   set (incbsd ${CMAKE_INSTALL_PREFIX}/include/bsd)
 endif()
 
 add_custom_command(
@@ -32,7 +37,7 @@ set_source_files_properties(${CMAKE_CURRENT_BINARY_DIR}/sha256hl.c PROPERTIES GE
 
 add_executable(${prog} ${srcs})
 target_link_libraries(${prog} ${libs})
-target_include_directories(${prog} PUBLIC ${incssl})
+target_include_directories(${prog} PUBLIC ${incssl} ${incbsd})
 
 install(TARGETS ${prog} DESTINATION bin)
 install(CODE "execute_process(COMMAND ${CMAKE_COMMAND} -E create_symlink \

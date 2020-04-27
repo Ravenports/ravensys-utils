@@ -8,7 +8,7 @@ For years, the following Ravenports existed separately:
 | bsd-patch          | FreeBSD/DragonFly patch program 
 | bsd-which          | FreeBSD/DragonFly which program 
 | sha256             | FreeBSD/Dragonfly sha256 and md5 programs
-| mtree-dragonfly    | DragonFly's mtree program
+| mtree              | DragonFly's mtree program (from NetBSD)
 | ravensys-uname     | Custom program to emulate uname consistently
 | ravensys-selector  | Linker deflector (switch between ld.bfd, gold, other).  Currently unused
 | libdl              | Empty dl library to prevent breakage when linker receives -ldl on non-linux platform
