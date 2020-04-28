@@ -9,15 +9,6 @@ set (incssl ${CMAKE_CURRENT_SOURCE_DIR}
 
 set (libs ${libssl})
 
-if (CMAKE_SYSTEM_NAME MATCHES "Linux")
-   set (libs ${libs} ${CMAKE_INSTALL_PREFIX}/lib/libbsd.a)
-endif()
-
-if (CMAKE_SYSTEM_NAME MATCHES "(Solaris|SunOS)")
-   set (libs ${libs} ${CMAKE_INSTALL_PREFIX}/lib/libbsd.a)
-   set (incbsd ${CMAKE_INSTALL_PREFIX}/include/bsd)
-endif()
-
 add_custom_command(
 	OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/md5hl.c
 	DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/mdXhl.c
@@ -36,6 +27,16 @@ set_source_files_properties(${CMAKE_CURRENT_BINARY_DIR}/md5hl.c PROPERTIES GENER
 set_source_files_properties(${CMAKE_CURRENT_BINARY_DIR}/sha256hl.c PROPERTIES GENERATED true)
 
 add_executable(${prog} ${srcs})
+
+if (CMAKE_SYSTEM_NAME MATCHES "Linux")
+   set (libs ${libs} ${CMAKE_INSTALL_PREFIX}/lib/libbsd.a)
+endif()
+
+if (CMAKE_SYSTEM_NAME MATCHES "(Solaris|SunOS)")
+   set (libs ${libs} ${CMAKE_INSTALL_PREFIX}/lib/libbsd.a)
+   set (incbsd ${CMAKE_INSTALL_PREFIX}/include/bsd)
+endif()
+
 target_link_libraries(${prog} ${libs})
 target_include_directories(${prog} PUBLIC ${incssl} ${incbsd})
 

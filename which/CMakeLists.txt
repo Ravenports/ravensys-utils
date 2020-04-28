@@ -2,6 +2,10 @@
 
 set (prog which)
 
+set (srcs which.c)
+
+add_executable(${prog} ${srcs})
+
 if (CMAKE_SYSTEM_NAME MATCHES "Linux")
    set (libs ${libs} ${CMAKE_INSTALL_PREFIX}/lib/libbsd.a)
    set (incbsd ${CMAKE_INSTALL_PREFIX}/include/bsd)
@@ -13,9 +17,6 @@ if (CMAKE_SYSTEM_NAME MATCHES "(Solaris|SunOS)")
    set (incbsd ${CMAKE_INSTALL_PREFIX}/include/bsd)
 endif()
 
-set (srcs which.c)
-
-add_executable(${prog} ${srcs})
 target_link_libraries(${prog} ${libs})
 target_include_directories(${prog} PUBLIC ${incbsd})
 
