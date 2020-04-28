@@ -41,6 +41,6 @@ target_include_directories(${prog} PUBLIC ${incssl} ${incbsd})
 
 install(TARGETS ${prog} DESTINATION bin)
 install(CODE "execute_process(COMMAND ${CMAKE_COMMAND} -E create_symlink \
-	md5 ${CMAKE_INSTALL_PREFIX}/bin/sha256)"
+	md5 ${RAVDEST}${CMAKE_INSTALL_PREFIX}/bin/sha256)"
 )
 install(CODE "message(\"-- Installing: symlink bin/sha256 -> bin/md5\")")
