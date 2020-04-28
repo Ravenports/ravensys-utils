@@ -1,0 +1,2 @@
+Fake uname for explicit use with ravenports jail.
+Real unames are tied to active kernels thus unusable.
