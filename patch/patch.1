@@ -28,9 +28,7 @@
 .Sh DESCRIPTION
 .Nm
 will take a patch file containing any of the four forms of difference
-listing produced by the
-.Xr diff 1
-program and apply those differences to an original file,
+listing produced by the diff program and apply those differences to an original file,
 producing a patched version.
 If
 .Ar patchfile
@@ -47,9 +45,7 @@ option.
 Context diffs (old-style, new-style, and unified) and
 normal diffs are applied directly by the
 .Nm
-program itself, whereas ed diffs are simply fed to the
-.Xr ed 1
-editor via a pipe.
+program itself, whereas ed diffs are simply fed to the ed editor via a pipe.
 .Pp
 If the
 .Ar patchfile
@@ -120,9 +116,7 @@ This option is useful when applying patches that create or remove files.
 .It Fl e , Fl Fl ed
 Forces
 .Nm
-to interpret the patch file as an
-.Xr ed 1
-script.
+to interpret the patch file as an ed script.
 .It Xo
 .Fl F Ar max-fuzz ,
 .Fl Fl fuzz Ar max-fuzz
@@ -142,7 +136,7 @@ ask any questions.
 It assumes the following:
 skip patches for which a file to patch cannot be found;
 patch files even though they have the wrong version for the
-.Qq Prereq:
+.Qq Prereq :
 line in the patch;
 and assume that patches are not reversed even if they look like they are.
 This option does not suppress commentary; use
@@ -266,7 +260,7 @@ in that it suppresses questions, but makes some different assumptions:
 skip patches for which a file to patch cannot be found (the same as
 .Fl f ) ;
 skip patches for which the file has the wrong version for the
-.Qq Prereq:
+.Qq Prereq :
 line in the patch;
 and assume that patches are reversed if they look like they are.
 .It Fl u , Fl Fl unified
@@ -373,7 +367,7 @@ line of context.
 If that fails, and the maximum fuzz factor is set to 2 or more,
 the first two and last two lines of context are ignored,
 and another scan is made.
-.Pq The default maximum fuzz factor is 2.
+.Pq The default maximum fuzz factor is 2 .
 .Pp
 If
 .Nm
@@ -430,7 +424,7 @@ and the
 file is specified in the line beginning with
 .Qq +++ .
 If there is an
-.Qq Index:
+.Qq Index :
 line in the leading garbage (regardless of the diff type),
 .Nm
 will use the file name from that line as the
@@ -524,13 +518,13 @@ First, you can save people a lot of grief by keeping a
 file which is patched to increment the patch level as the first diff in the
 patch file you send out.
 If you put a
-.Qq Prereq:
+.Qq Prereq :
 line in with the patch, it will not let them apply
 patches out of order without some warning.
 .Pp
 Second, make sure you have specified the file names right, either in a
 context diff header, or with an
-.Qq Index:
+.Qq Index :
 line.
 If you are patching something in a subdirectory, be sure to tell the patch
 user to specify a
@@ -605,8 +599,6 @@ indicates that there is unprocessed text in the patch file and that
 .Nm
 is attempting to intuit whether there is a patch in that text and, if so,
 what kind of patch it is.
-.Sh SEE ALSO
-.Xr diff 1
 .Sh STANDARDS
 The
 .Nm
