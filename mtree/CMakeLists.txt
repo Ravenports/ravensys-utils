@@ -34,6 +34,7 @@ if (CMAKE_SYSTEM_NAME MATCHES "(Solaris|SunOS)")
    set (incbsd ${CMAKE_INSTALL_PREFIX}/include/bsd)
 endif()
 
+target_compile_definitions(${prog} PUBLIC USE_SHA1)
 target_link_libraries(${prog} ${libs})
 target_include_directories(${prog} PUBLIC ${incssl} ${incbsd})
 
