@@ -30,6 +30,13 @@ if (${RAVENOPSYS} STREQUAL "SunOS")
   endif()
 endif()
 
+if (${RAVENOPSYS} STREQUAL "NetBSD")
+  if (${RAVENPLAT} STREQUAL "x86_64")
+	set(RAVENARCH amd64)
+	set(URELEASE ${RAVENRELEASE})
+  endif()
+endif()
+
 add_custom_command(
 	OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/uname.c
 	DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/uname.c.in

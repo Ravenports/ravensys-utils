@@ -50,6 +50,10 @@
 #define TEST_BLOCK_COUNT 100000
 #define MDTESTCOUNT 8
 
+#ifndef MAP_NOCORE
+#define MAP_NOCORE 0
+#endif
+
 int qflag;
 int rflag;
 int sflag;
@@ -166,11 +170,7 @@ digestfile(const char *fname, char *buf, const Algorithm_t *alg,
 		else
 			size = end - begin;
 
-#if defined __linux__ || defined __sun__ || defined __APPLE__
-		map = mmap(NULL, size, PROT_READ, 0, fd, begin);
-#else
 		map = mmap(NULL, size, PROT_READ, MAP_NOCORE, fd, begin);
-#endif
 		if (map == MAP_FAILED) {
 			warn("mmaping of %s between %jd and %jd ",
 			    fname, (intmax_t)begin, (intmax_t)begin + size);

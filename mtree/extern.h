@@ -1,6 +1,6 @@
 #include <stdint.h>
 
-#if defined __linux__ || defined __sun__
+#if defined __linux__ || defined __sun__ || defined __NetBSD__
 #define __sunlinux__
 #endif
 

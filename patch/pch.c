@@ -1,6 +1,10 @@
 #include <sys/types.h>
 #include <sys/stat.h>
 
+#ifdef __NetBSD__
+#define _OPENBSD_SOURCE
+#endif
+
 #include <ctype.h>
 #include <libgen.h>
 #include <limits.h>
@@ -51,6 +55,19 @@ static char	*best_name(const struct file_name *, bool);
 static char	*posix_name(const struct file_name *, bool);
 static size_t	num_components(const char *);
 static LINENUM	strtolinenum(char *, char **);
+
+#if defined __NetBSD__
+static void *
+reallocf(void *ptr, size_t size)
+{
+    void *nptr;
+
+    nptr = realloc(ptr, size);
+    if (!nptr && ptr)
+        free(ptr);
+    return (nptr);
+}
+#endif
 
 /*
  * Prepare to look for the next patch in the patch file.
