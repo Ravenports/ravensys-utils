@@ -17,6 +17,7 @@
 #include "common.h"
 #include "util.h"
 #include "pch.h"
+#include "forsunos.h"
 #include "pathnames.h"
 #include "mac_support.h"
 

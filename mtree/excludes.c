@@ -10,6 +10,7 @@
 
 #include "mtree.h"		/* XXX for extern.h */
 #include "extern.h"
+#include "forsunos.h"
 
 /*
  * We're assuming that there won't be a whole lot of excludes, 

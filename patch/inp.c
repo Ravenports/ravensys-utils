@@ -13,6 +13,7 @@
 #include <string.h>
 #include <unistd.h>
 
+#include "forsunos.h"
 #include "common.h"
 #include "util.h"
 #include "pch.h"
