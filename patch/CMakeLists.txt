@@ -15,6 +15,10 @@ if (CMAKE_SYSTEM_NAME MATCHES "Darwin")
    set (srcs ${srcs} mac_support.c)
 endif()
 
+if (CMAKE_SYSTEM_NAME MATCHES "(Solaris|SunOS)")
+   set (srcs ${srcs} fgetln.c)
+endif()
+
 add_executable(${prog} ${srcs})
 
 if (CMAKE_SYSTEM_NAME MATCHES "Linux")
