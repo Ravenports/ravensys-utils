@@ -29,9 +29,8 @@ if (CMAKE_SYSTEM_NAME MATCHES "Linux")
 endif()
 
 if (CMAKE_SYSTEM_NAME MATCHES "(Solaris|SunOS)")
-   set (libs ${libs} ${CMAKE_INSTALL_PREFIX}/lib/libbsd.a)
+   set (srcs ${srcs} unvis.c vis.c}
    set (libs ${libs} ${CMAKE_INSTALL_PREFIX}/lib/libfts.a)
-   set (incbsd ${CMAKE_INSTALL_PREFIX}/include/bsd)
 endif()
 
 target_compile_definitions(${prog} PUBLIC USE_SHA1)

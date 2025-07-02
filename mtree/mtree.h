@@ -7,6 +7,10 @@
 
 #define	MISMATCHEXIT	2
 
+#if !defined(S_ISTXT)
+#define S_ISTXT 0
+#endif
+
 typedef struct _node {
 	struct _node	*parent, *child;	/* up, down */
 	struct _node	*prev, *next;		/* left, right */
