@@ -9,6 +9,7 @@
 #include <stdio.h>
 #include <unistd.h>
 #include <strings.h>
+#include "forsunos.h"
 #include "bsdvis.h"
 #include "mtree.h"
 #include "extern.h"

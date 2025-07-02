@@ -29,7 +29,7 @@ if (CMAKE_SYSTEM_NAME MATCHES "Linux")
 endif()
 
 if (CMAKE_SYSTEM_NAME MATCHES "(Solaris|SunOS)")
-   set (srcs ${srcs} unvis.c vis.c fgetln.c)
+   set (srcs ${srcs} unvis.c vis.c fgetln.c setmode.c)
    set (libs ${libs} ${CMAKE_INSTALL_PREFIX}/lib/libfts.a)
 endif()
 
