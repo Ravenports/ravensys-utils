@@ -22,7 +22,7 @@
 #include <time.h>
 #include <unistd.h>
 #include <stdarg.h>
-#include <vis.h>
+#include "bsdvis.h"
 #include "mtree.h"
 #include "extern.h"
 

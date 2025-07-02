@@ -33,7 +33,7 @@
 #include <ctype.h>
 #include <string.h>
 #include <stdio.h>
-#include <bsdvis.h>
+#include "bsdvis.h"
 
 #define	isoctal(c)	\
 	(((unsigned char)(c)) >= '0' && ((unsigned char)(c)) <= '7')

@@ -29,7 +29,7 @@
 
 #include <sys/types.h>
 #include <ctype.h>
-#include <bsdvis.h>
+#include "bsdvis.h"
 
 /*
  * decode driven by state machine

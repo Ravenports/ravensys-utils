@@ -9,7 +9,7 @@
 #include <stdio.h>
 #include <unistd.h>
 #include <strings.h>
-#include <vis.h>
+#include "bsdvis.h"
 #include "mtree.h"
 #include "extern.h"
 
