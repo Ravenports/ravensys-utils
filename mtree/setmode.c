@@ -46,6 +46,10 @@
 #include <stdio.h>
 #endif
 
+#if !defined(S_ISTXT)
+#define S_ISTXT S_ISVTX
+#endif
+
 #define	SET_LEN	6		/* initial # of bitcmd struct to malloc */
 #define	SET_LEN_INCR 4		/* # of bitcmd structs to add as needed */
 
