@@ -19,7 +19,6 @@ set (srcs
 	sha1hl.c
 )
 
-add_executable(${prog} ${srcs})
 
 if (CMAKE_SYSTEM_NAME MATCHES "Linux")
    set (libs ${libs} ${CMAKE_INSTALL_PREFIX}/lib/libbsd.a)
@@ -33,6 +32,7 @@ if (CMAKE_SYSTEM_NAME MATCHES "(Solaris|SunOS)")
    set (libs ${libs} ${CMAKE_INSTALL_PREFIX}/lib/libfts.a)
 endif()
 
+add_executable(${prog} ${srcs})
 target_compile_definitions(${prog} PUBLIC USE_SHA1)
 target_link_libraries(${prog} ${libs})
 target_include_directories(${prog} PUBLIC ${incssl} ${incbsd})
