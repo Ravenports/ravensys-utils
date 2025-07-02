@@ -8,7 +8,7 @@
 #define	MISMATCHEXIT	2
 
 #if !defined(S_ISTXT)
-#define S_ISTXT 0
+#define S_ISTXT S_ISVTX
 #endif
 
 typedef struct _node {
