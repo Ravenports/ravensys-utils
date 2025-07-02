@@ -32,13 +32,8 @@ if (CMAKE_SYSTEM_NAME MATCHES "Linux")
    set (libs ${libs} ${CMAKE_INSTALL_PREFIX}/lib/libbsd.a)
 endif()
 
-if (CMAKE_SYSTEM_NAME MATCHES "(Solaris|SunOS)")
-   set (libs ${libs} ${CMAKE_INSTALL_PREFIX}/lib/libbsd.a)
-   set (incbsd ${CMAKE_INSTALL_PREFIX}/include/bsd)
-endif()
-
 target_link_libraries(${prog} ${libs})
-target_include_directories(${prog} PUBLIC ${incssl} ${incbsd})
+target_include_directories(${prog} PUBLIC ${incssl})
 
 install(TARGETS ${prog} DESTINATION bin)
 install(CODE "execute_process(COMMAND ${CMAKE_COMMAND} -E create_symlink \

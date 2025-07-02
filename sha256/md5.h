@@ -41,14 +41,12 @@
 #ifdef __sun__
 #define u_int32_t uint32_t
 #endif
-#include <sys/cdefs.h>
 #include <sys/types.h>
 #include <openssl/md5.h>
 
 #define MD5_BLOCK_LENGTH		MD5_CBLOCK
 #define MD5_DIGEST_STRING_LENGTH	(MD5_DIGEST_LENGTH * 2 + 1)
 
-__BEGIN_DECLS
 int MD5Init (MD5_CTX *);
 void MD5Update (MD5_CTX *, const void *, unsigned int);
 void MD5Pad (MD5_CTX *);
@@ -58,6 +56,5 @@ char *MD5File(const char *, char *);
 char *MD5FileChunk(const char *, char *, off_t, off_t);
 char *MD5Data(const void *, unsigned int, char *);
 void MD5Transform (u_int32_t [4], const unsigned char [64]);
-__END_DECLS
 
 #endif /* _MD5_H_ */

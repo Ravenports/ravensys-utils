@@ -38,7 +38,6 @@ static unsigned char PADDING[64] = {
 };
 
 
-#include <sys/cdefs.h>
 #ifdef __linux__
 #include <endian.h>
 #elif defined __sun__

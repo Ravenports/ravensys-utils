@@ -37,15 +37,12 @@
 #ifndef _SHA256_H_
 #define _SHA256_H_
 
-#include <sys/cdefs.h>
 #include <sys/types.h>
 #include <openssl/sha.h>
 
-__BEGIN_DECLS
 char *SHA256_End(SHA256_CTX *, char *);
 char *SHA256_File(const char *, char *);
 char *SHA256_FileChunk(const char *, char *, off_t, off_t);
 char *SHA256_Data(const void *, unsigned int, char *);
-__END_DECLS
 
 #endif
