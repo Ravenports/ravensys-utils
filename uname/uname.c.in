@@ -69,7 +69,7 @@ main(int argc, char *argv[])
 		case 'v':
 			flags |= VFLAG;
 			break;
-		case 'o:
+		case 'o':
 			flags |= OFLAG;
 			break;
 		case '?':
