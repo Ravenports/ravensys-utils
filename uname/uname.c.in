@@ -16,6 +16,7 @@
 #define	VFLAG	0x20
 #define	IFLAG	0x40
 #define	UFLAG	0x80
+#define	OFLAG 0x100
 
 static void print_uname(u_int);
 static void usage(void);
@@ -26,8 +27,9 @@ static const char *platform = "@PLATFORM@";
 static const char *release  = "@RELEASE@";
 static const char *uservers = "@USERVER@";
 static const char *ident    = "GENERIC";
-static const char *version  = "@OPSYS@ @RELEASE@ #0 Sat Jul 29 09:00:00 CDT 2017 root@octavia.unreal.systems:/usr/obj/usr/src/sys/GENERIC";
+static const char *version  = "@OPSYS@ @RELEASE@ #0 Sat Jul 29 09:00:00 CDT 2024 root@octavia.unreal.systems:/usr/obj/usr/src/sys/GENERIC";
 static const char *hostname = "octavia.unreal.systems";
+static const char *opsys    = "@BRAND@";
 static int space;
 
 int
@@ -59,7 +61,6 @@ main(int argc, char *argv[])
 			flags |= RFLAG;
 			break;
 		case 's':
-		case 'o':
 			flags |= SFLAG;
 			break;
 		case 'U':
@@ -67,6 +68,9 @@ main(int argc, char *argv[])
 			break;
 		case 'v':
 			flags |= VFLAG;
+			break;
+		case 'o
+			flags |= OFLAG;
 			break;
 		case '?':
 		default:
@@ -99,6 +103,7 @@ static void
 print_uname(u_int flags)
 {
 	PRINT_FLAG(flags, SFLAG, sysname);
+	PRINT_FLAG(flags, OFLAG, opsys);
 	PRINT_FLAG(flags, NFLAG, hostname);
 	PRINT_FLAG(flags, RFLAG, release);
 	PRINT_FLAG(flags, VFLAG, version);
