@@ -19,12 +19,13 @@ set (srcs
 	sha1hl.c
 )
 
+set (defs USE_SHA1)
 
 if (CMAKE_SYSTEM_NAME MATCHES "Linux")
    set (libs ${libs} ${CMAKE_INSTALL_PREFIX}/lib/libbsd.a)
    set (libs ${libs} -lpthread)
    set (incbsd ${CMAKE_INSTALL_PREFIX}/include/bsd)
-   target_compile_definitions(${prog} PUBLIC LIBBSD_OVERLAY)
+   set (defs ${defs} LIBBSD_OVERLAY)
 endif()
 
 if (CMAKE_SYSTEM_NAME MATCHES "(Solaris|SunOS)")
@@ -33,7 +34,7 @@ if (CMAKE_SYSTEM_NAME MATCHES "(Solaris|SunOS)")
 endif()
 
 add_executable(${prog} ${srcs})
-target_compile_definitions(${prog} PUBLIC USE_SHA1)
+target_compile_definitions(${prog} PUBLIC ${defs})
 target_link_libraries(${prog} ${libs})
 target_include_directories(${prog} PUBLIC ${incssl} ${incbsd})
 

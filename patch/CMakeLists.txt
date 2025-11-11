@@ -20,12 +20,15 @@ if (CMAKE_SYSTEM_NAME MATCHES "(Solaris|SunOS)")
 endif()
 
 if (CMAKE_SYSTEM_NAME MATCHES "Linux")
-   set (libs ${libs} ${CMAKE_INSTALL_PREFIX}/lib/libbsd.a)
    set (srcs ${srcs} linux_support.c)
-   target_link_libraries(${prog} ${libs})
 endif()
 
 add_executable(${prog} ${srcs})
+
+if (CMAKE_SYSTEM_NAME MATCHES "Linux")
+   set (libs ${libs} ${CMAKE_INSTALL_PREFIX}/lib/libbsd.a)
+   target_link_libraries(${prog} ${libs})
+endif()
 
 install(TARGETS ${prog} DESTINATION bin)
 install(FILES ${prog}.1 DESTINATION share/man/man1)
