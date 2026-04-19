@@ -1,0 +1,116 @@
+/*
+ * This program will automatically exec another program as a function
+ * of the program name (argument 0) and environment variables.
+ *
+ *   ENV. VAR    VALUE       command    EXECUTED
+ *   -----------------------------------------------------
+ *   LINKER      unset       ld         @BASE@/toolchain/bin/raven.lld
+ *   LINKER      lld         ld         @BASE@/toolchain/bin/raven.lld
+ *   LINKER      bfd         ld         @BASE@/toolchain/bin/ld.bfd
+ *   LINKER      gold        ld         @BASE@/toolchain/bin/ld.gold
+ *   LINKER      mold        ld         @BASE@/bin/ld.mold
+ *   LINKER      all else    ld         @BASE@/toolchain/bin/ld.bfd *
+ *
+ *   * A notice will appear about invalid selection and linker chosen
+ */
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <unistd.h>
+
+#undef NELEM
+#undef TOOLCHAIN_BASE
+#undef LOCALBASE
+
+/* Macro for array size */
+#define NELEM(ary)      (sizeof(ary) / sizeof((ary)[0]))
+
+enum cmd_type { UNKNOWN, LINKER };
+
+struct command {
+	const char *cmd;
+	enum cmd_type type;
+};
+
+static struct command commands[] = {
+	{"ld",			LINKER},
+	{"",			UNKNOWN}
+};
+
+int
+main(int argc, char **argv)
+{
+	char ld_bfd[] = "@BASE@/toolchain/bin/ld.bfd";
+	char ld_gld[] = "@BASE@/toolchain/bin/ld.gold";
+	char ld_lld[] = "@BASE@/toolchain/bin/raven.lld";
+	char ld_mld[] = "@BASE@/bin/ld.mold";
+	char badsel[] = "NOTICE: Invalid LINKER (bfd,lld,gold,mold), bfd selected.\n";
+	char *cmd;
+	char *ldcmd = ld_bfd;
+	char *newargv[argc];
+	char newcmd[1024];
+	const char *ldver;
+	struct command *cmds;
+	int newx = 0;
+	int x;
+
+	/*
+	 * Get the last path element of the program name being executed
+	 */
+	cmd = strrchr(argv[0], '/');
+	if (cmd != NULL)
+		cmd++;
+	else
+		cmd = argv[0];
+
+	for (cmds = commands; cmds < &commands[NELEM(commands) - 1]; ++cmds) {
+		if (strcmp(cmd, cmds->cmd) == 0)
+			break;
+	}
+	if (cmds) {
+		switch (cmds->type) {
+		case LINKER:
+			ldver = getenv("LINKER");
+			if (ldver != NULL) {
+				if (strcmp(ldver, "mold") == 0)
+					ldcmd = ld_mld;
+				else if (strcmp(ldver, "gold") == 0)
+					ldcmd = ld_gld;
+				else if (strcmp(ldver, "bfd") == 0)
+					ldcmd = ld_bfd;
+				else if (strcmp(ldver, "lld") == 0)
+					ldcmd = ld_lld;
+				else {
+					printf (badsel);
+				}
+				cmd = ldcmd;
+			} else {
+				if (access(ld_lld, F_OK) != -1)
+					cmd = ld_lld;
+				else
+					cmd = ld_bfd;
+			}
+			break;
+		default:
+			printf ("Command name unmatched\n");
+			exit (1);
+		}
+	}
+
+	snprintf(newcmd, sizeof(newcmd), "%s", cmd);
+
+	argv[0] = newcmd;
+	execv(newcmd, argv);
+
+
+	/*
+	 * Execution failed, so write out an error message
+	 */
+	printf ("Command execution failed: %s\n", newcmd);
+	printf ("               arguments:");
+	for (x = 1; x < argc; x++)
+		printf (" %s", argv[x]);
+	printf ("\n");
+	exit (1);
+}
