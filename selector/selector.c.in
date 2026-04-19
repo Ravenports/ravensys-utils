@@ -4,8 +4,8 @@
  *
  *   ENV. VAR    VALUE       command    EXECUTED
  *   -----------------------------------------------------
- *   LINKER      unset       ld         @BASE@/toolchain/bin/raven.lld
- *   LINKER      lld         ld         @BASE@/toolchain/bin/raven.lld
+ *   LINKER      unset       ld         @BASE@/toolchain/llvm/bin/ld.lld
+ *   LINKER      lld         ld         @BASE@/toolchain/llvm/bin/ld.lld
  *   LINKER      bfd         ld         @BASE@/toolchain/bin/ld.bfd
  *   LINKER      gold        ld         @BASE@/toolchain/bin/ld.gold
  *   LINKER      mold        ld         @BASE@/bin/ld.mold
@@ -43,7 +43,7 @@ main(int argc, char **argv)
 {
 	char ld_bfd[] = "@BASE@/toolchain/bin/ld.bfd";
 	char ld_gld[] = "@BASE@/toolchain/bin/ld.gold";
-	char ld_lld[] = "@BASE@/toolchain/bin/raven.lld";
+	char ld_lld[] = "@BASE@/toolchain/llvm/bin/ld.lld";
 	char ld_mld[] = "@BASE@/bin/ld.mold";
 	char badsel[] = "NOTICE: Invalid LINKER (bfd,lld,gold,mold), bfd selected.\n";
 	char *cmd;
